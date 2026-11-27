@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Кроссворд «Каникулы Петрова и Васечкина» для печати: сетка и все вопросы на одной странице.">
+<title>Для печати — Каникулы Петрова и Васечкина</title>
+<style>
+  @page{size:A4 portrait;margin:10mm}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;color:#2b2118;
+    background:
+      radial-gradient(circle at 12% 18%,rgba(244,180,26,.16) 0 14%,transparent 14.4%),
+      repeating-linear-gradient(135deg,rgba(107,91,69,.035) 0 2px,transparent 2px 9px),
+      #f6efdc;
+    font-family:"Trebuchet MS",Arial,sans-serif;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;cursor:pointer}
+
+  .topbar{background:#c1272d;color:#fff8e7;border-bottom:4px solid #f4b41a;box-shadow:0 6px 18px rgba(80,20,20,.24)}
+  .topbar-inner{width:min(1180px,92vw);margin:0 auto;min-height:66px;display:flex;align-items:center;gap:22px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:15px;white-space:nowrap}
+  .brand-star{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#f4b41a;color:#8d1d22;font-size:21px;box-shadow:0 0 0 3px #fff4d2 inset}
+  .topnav{display:flex;gap:22px;margin-left:auto;font-size:14px;font-weight:700}
+  .topnav a{opacity:.88;transition:.2s}
+  .topnav a:hover,.topnav a.active{opacity:1;color:#f4b41a}
+  .topbar-cta{background:#f4b41a;color:#5a1a12;border-radius:999px;padding:10px 19px;font-weight:800;font-size:14px;white-space:nowrap;box-shadow:0 4px 0 #b77d0d}
+  .topbar-cta:hover{transform:translateY(-2px)}
+
+  .print-sheet{
+    position:relative;width:min(190mm,94vw);margin:28px auto 14px;padding:9mm 10mm 8mm;
+    background:#fffaf0;border:2.5mm solid #c1272d;
+    box-shadow:0 18px 40px rgba(72,45,22,.24);
+  }
+  .print-sheet::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(circle at 8% 12%,rgba(244,180,26,.14) 0 3mm,transparent 3.4mm),
+      radial-gradient(circle at 92% 86%,rgba(193,39,45,.09) 0 4mm,transparent 4.4mm),
+      repeating-linear-gradient(45deg,rgba(107,91,69,.022) 0 3mm,transparent 3mm 6mm);
+  }
+  .sheet-inner{position:relative}
+
+  .hdr-wrap{position:relative}
+  .hdr{text-align:center;padding:0 22mm}
+  .hdr-top{font-size:9pt;letter-spacing:1.2mm;text-transform:uppercase;color:#6b5b3e;font-weight:800}
+  .hdr h1{margin:2mm 0;font-family:"Arial Black",Impact,sans-serif;font-size:25pt;line-height:1.02;text-transform:uppercase;color:#c1272d;letter-spacing:.3mm}
+  .hdr-sub{font-size:10pt;color:#4a4a4a;font-style:italic}
+  .hdr-deco{position:absolute;top:0;width:22mm;height:22mm}
+  .hdr-deco svg{width:100%;height:100%}
+  .hdr-left{left:0}
+  .hdr-right{right:0}
+  .rule{height:.7mm;background:#c1272d;margin:4mm 0 3mm}
+
+  .grid-wrap{display:flex;justify-content:center;margin:2mm 0 3mm}
+  table.cw-grid{border-collapse:separate;border-spacing:1mm;table-layout:fixed}
+  table.cw-grid td{width:9mm;height:9mm;padding:0;position:relative}
+  table.cw-grid td.box{border:.3mm solid #333;background:#fff}
+  table.cw-grid td.blank{background:rgba(107,91,69,.05)}
+  table.cw-grid td.box .n{position:absolute;left:.6mm;top:.4mm;font:700 6pt/1 Arial,sans-serif;color:#c1272d;z-index:1}
+
+  .questions{display:flex;gap:8mm;margin-top:3mm}
+  .questions>div{flex:1}
+  .questions h2{font-size:12pt;color:#c1272d;margin:0 0 2mm;border-bottom:.4mm solid #c1272d;padding-bottom:1mm;text-transform:uppercase}
+  .questions p{font-size:9pt;line-height:1.32;margin:0 0 1.8mm;padding-left:5mm;text-indent:-5mm}
+  .questions b{color:#c1272d;font-weight:800}
+
+  .foot{text-align:center;margin-top:4mm;font-size:9pt;color:#6b5b3e;font-style:italic;letter-spacing:.3mm}
+  .print-actions{display:flex;justify-content:center;gap:12px;margin:0 auto 30px}
+  .print-actions button,.print-actions a{
+    border:2px solid #c1272d;background:#fff8e7;color:#8d1d22;
+    padding:11px 20px;font-weight:800;text-transform:uppercase;font-size:13px;border-radius:3px;
+  }
+  .print-actions button{background:#c1272d;color:#fff8e7}
+  .print-actions button:hover{background:#8d1d22}
+
+  @media (max-width:640px){
+    .topnav{display:none}
+    .topbar-cta{margin-left:auto;padding:8px 13px;font-size:12px}
+    .brand{font-size:12px}
+    .hdr{padding:0 16mm}
+    .hdr h1{font-size:19pt}
+    .hdr-deco{width:16mm;height:16mm}
+    .questions{flex-direction:column;gap:5mm}
+    table.cw-grid td{width:7mm;height:7mm}
+    table.cw-grid{border-spacing:.7mm}
+  }
+
+  @media print{
+    body{background:#fff}
+    .topbar,.print-actions{display:none!important}
+    .print-sheet{width:100%;max-width:none;margin:0;padding:0;border:0;box-shadow:none}
+    .print-sheet::before{display:none}
+    .hdr h1{font-size:26pt}
+    .questions{break-inside:avoid}
+    table.cw-grid,.questions,.hdr-wrap{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html"><span class="brand-star">★</span> Отряд «Солнышко»</a>
+    <nav class="topnav" aria-label="Навигация">
+      <a href="index.html">Главная</a>
+      <a href="index.html#crossword">Кроссворд</a>
+      <a class="active" href="print.html">Для печати</a>
+      <a href="index.html#answers">Ответы</a>
+    </nav>
+    <button class="topbar-cta" type="button" onclick="window.print()">Печать</button>
+  </div>
+</header>
+
+<main>
+  <div class="print-sheet">
+    <div class="sheet-inner">
+
+      <div class="hdr-wrap">
+        <div class="hdr-deco hdr-left">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs><radialGradient id="pG"><stop offset="0%" stop-color="#e53935"/><stop offset="100%" stop-color="#8b1a15"/></radialGradient></defs>
+            <g>
+              <path d="M50 15 Q60 45 50 82 Q40 45 50 15 Z" fill="url(#pG)"/>
+              <path d="M28 30 Q40 55 32 84 Q22 58 28 30 Z" fill="url(#pG)" opacity=".9"/>
+              <path d="M72 30 Q78 58 68 84 Q60 55 72 30 Z" fill="url(#pG)" opacity=".9"/>
+            </g>
+          </svg>
+        </div>
+        <div class="hdr-deco hdr-right">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs><radialGradient id="sG"><stop offset="0%" stop-color="#ffe082"/><stop offset="65%" stop-color="#ffb300"/><stop offset="100%" stop-color="#ff8f00" stop-opacity="0"/></radialGradient></defs>
+            <circle cx="50" cy="50" r="30" fill="url(#sG)"/>
+            <circle cx="50" cy="50" r="18" fill="#ffca28" opacity=".8"/>
+            <g stroke="#ff8f00" stroke-width="3" stroke-linecap="round" opacity=".7">
+              <line x1="50" y1="8" x2="50" y2="18"/><line x1="50" y1="82" x2="50" y2="92"/>
+              <line x1="8" y1="50" x2="18" y2="50"/><line x1="82" y1="50" x2="92" y2="50"/>
+              <line x1="20" y1="20" x2="27" y2="27"/><line x1="73" y1="73" x2="80" y2="80"/>
+              <line x1="20" y1="80" x2="27" y2="73"/><line x1="73" y1="27" x2="80" y2="20"/>
+            </g>
+          </svg>
+        </div>
+        <div class="hdr">
+          <div class="hdr-top">Пионерский лагерь · кроссворд</div>
+          <h1>Каникулы Петрова и Васечкина</h1>
+          <div class="hdr-sub">обыкновенные и невероятные · версия для печати</div>
+        </div>
+      </div>
+      <div class="rule"></div>
+
+      <div class="grid-wrap">
+        <table class="cw-grid" aria-label="Кроссворд для печати">
+          <tbody>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><span class="n">1</span></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><span class="n">2</span></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><span class="n">3</span></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><span class="n">4</span></td>
+        <td class="box"></td>
+        <td class="box"></td>
+        <td class="box"></td>
+        <td class="box"></td>
+        <td class="box"></td>
+        <td class="box"></td>
+        <td class="box"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><span class="n">5</span></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><span class="n">6</span></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><span class="n">7</span></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><span class="n">8</span></td>
+        <td class="box"></td>
+        <td class="box"></td>
+        <td class="box"></td>
+        <td class="box"></td>
+        <td class="box"></td>
+        <td class="box"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><span class="n">9</span></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><span class="n">10</span></td>
+        <td class="box"></td>
+        <td class="box"></td>
+        <td class="box"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><span class="n">11</span></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><span class="n">12</span></td>
+        <td class="box"></td>
+        <td class="box"></td>
+        <td class="box"></td>
+        <td class="box"></td>
+        <td class="box"></td>
+        <td class="box"></td>
+        <td class="box"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"></td>
+      </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="questions">
+        <div>
+          <h2>По горизонтали →</h2>
+          <p><b>4.</b> Летом в школе не учатся. Почему? Потому что у детей…</p>
+          <p><b>8.</b> Игрушка, из которой стреляют камешками.</p>
+          <p><b>10.</b> Самое тёплое время года, когда не надо ходить в школу.</p>
+          <p><b>12.</b> Фамилия друга Петрова, который всё время придумывает шалости.</p>
+        </div>
+        <div>
+          <h2>По вертикали ↓</h2>
+          <p><b>1.</b> Куда приехали отдыхать Петров и Васечкина? Там живут в домиках и палатках.</p>
+          <p><b>2.</b> Школьник в красном галстуке в советское время.</p>
+          <p><b>3.</b> Птица, которая шипит. И так же звали хулигана из фильма.</p>
+          <p><b>5.</b> Как звали девочку, в которую был влюблён Петров?</p>
+          <p><b>6.</b> Фамилия одного из двух главных друзей. Как его зовут? Вася…</p>
+          <p><b>7.</b> Здание «с крыльями», к которому едут герои фильма, повторяя подвиг из книги про Дон Кихота.</p>
+          <p><b>9.</b> За кого принял Васечкин собаку пастуха?</p>
+          <p><b>11.</b> Старинное оружие рыцаря.</p>
+        </div>
+      </div>
+
+      <div class="foot">★ Пионерский лагерь · лето · дружба · приключения ★</div>
+    </div>
+  </div>
+
+  <div class="print-actions">
+    <button type="button" onclick="window.print()">Распечатать</button>
+    <a href="index.html">На главную</a>
+  </div>
+</main>
+
+</body>
+</html>
