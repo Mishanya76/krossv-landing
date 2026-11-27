@@ -69,7 +69,12 @@
   .questions p{font-size:9pt;line-height:1.32;margin:0 0 1.8mm;padding-left:5mm;text-indent:-5mm}
   .questions b{color:#c1272d;font-weight:800}
 
-  .foot{text-align:center;margin-top:4mm;font-size:9pt;color:#6b5b3e;font-style:italic;letter-spacing:.3mm}
+  .bottom-row{display:flex;align-items:flex-end;gap:5mm;margin-top:5mm}
+  .print-qr{
+    width:26mm;height:26mm;flex:0 0 26mm;display:block;
+    border:.8mm solid #fff8e7;box-shadow:0 1px 4px rgba(72,45,22,.28);
+  }
+  .foot{flex:1;text-align:right;margin:0 0 1mm;font-size:9pt;color:#6b5b3e;font-style:italic;letter-spacing:.3mm}
   .print-actions{display:flex;justify-content:center;gap:12px;margin:0 auto 30px}
   .print-actions button,.print-actions a{
     border:2px solid #c1272d;background:#fff8e7;color:#8d1d22;
@@ -96,6 +101,7 @@
     .print-sheet{width:100%;max-width:none;margin:0;padding:0;border:0;box-shadow:none}
     .print-sheet::before{display:none}
     .hdr h1{font-size:26pt}
+    .print-qr{box-shadow:none;border:0}
     .questions{break-inside:avoid}
     table.cw-grid,.questions,.hdr-wrap{break-inside:avoid}
   }
@@ -396,7 +402,10 @@
         </div>
       </div>
 
-      <div class="foot">★ Пионерский лагерь · лето · дружба · приключения ★</div>
+      <div class="bottom-row">
+        <img class="print-qr" src="qr-krossv.png" alt="QR-код со ссылкой на кроссворд">
+        <div class="foot">★ Пионерский лагерь · лето · дружба · приключения ★<br>Наведи камеру — и кроссворд откроется онлайн</div>
+      </div>
     </div>
   </div>
 
