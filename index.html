@@ -969,7 +969,10 @@
   const cellMap = {};
   cellEls.forEach(function(td){
     const input = td.querySelector(".cell");
-    cellMap[td.dataset.r + ":" + td.dataset.c] = {td:td, input:input};
+    if(!input) return;
+    const r = td.dataset.r || input.dataset.r;
+    const c = td.dataset.c || input.dataset.c;
+    cellMap[r + ":" + c] = {td:td, input:input};
   });
 
   const statusEl = document.getElementById("status");
