@@ -70,10 +70,12 @@
   .questions b{color:#c1272d;font-weight:800}
 
   .bottom-row{display:flex;align-items:flex-end;gap:5mm;margin-top:5mm}
+  .qr-block{flex:0 0 42mm;margin:0;text-align:center}
   .print-qr{
-    width:26mm;height:26mm;flex:0 0 26mm;display:block;
+    width:26mm;height:26mm;display:block;margin:0 auto;
     border:.8mm solid #fff8e7;box-shadow:0 1px 4px rgba(72,45,22,.28);
   }
+  .qr-hint{margin:1.5mm 0 0;font-size:8pt;line-height:1.25;color:#6b5b3e;font-style:italic}
   .foot{flex:1;text-align:right;margin:0 0 1mm;font-size:9pt;color:#6b5b3e;font-style:italic;letter-spacing:.3mm}
   .print-actions{display:flex;justify-content:center;gap:12px;margin:0 auto 30px}
   .print-actions button,.print-actions a{
@@ -403,8 +405,11 @@
       </div>
 
       <div class="bottom-row">
-        <img class="print-qr" src="qr-krossv.png" alt="QR-код со ссылкой на кроссворд">
-        <div class="foot">★ Пионерский лагерь · лето · дружба · приключения ★<br>Наведи камеру — и кроссворд откроется онлайн</div>
+        <figure class="qr-block">
+          <img class="print-qr" src="qr-krossv.png" alt="QR-код со ссылкой на кроссворд">
+          <figcaption class="qr-hint">Хотите пройти кроссворд на телефоне? Открывайте тут</figcaption>
+        </figure>
+        <div class="foot">★ Пионерский лагерь · лето · дружба · приключения ★</div>
       </div>
     </div>
   </div>
