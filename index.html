@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Яркий кроссворд по фильму «Каникулы Петрова и Васечкина» в стиле советского пионерского лагеря.">
+<title>Каникулы Петрова и Васечкина — пионерский кроссворд</title>
+<style>
+  :root{
+    --red:#c1272d;
+    --red-dark:#8d1d22;
+    --cream:#f6efdc;
+    --paper:#fffaf0;
+    --ink:#2b2118;
+    --muted:#6b5b45;
+    --gold:#f4b41a;
+    --green:#2f7d59;
+    --blue:#2466a8;
+    --shadow:0 14px 34px rgba(72,45,22,.22);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 12% 18%, rgba(244,180,26,.16) 0 14%, transparent 14.4%),
+      radial-gradient(circle at 86% 62%, rgba(193,39,45,.09) 0 12%, transparent 12.4%),
+      repeating-linear-gradient(135deg, rgba(107,91,69,.035) 0 2px, transparent 2px 9px),
+      var(--cream);
+    font-family:"Trebuchet MS", Arial, sans-serif;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;cursor:pointer}
+  .wrap{width:min(1180px,92vw);margin-inline:auto}
+
+  /* ===== Верхняя панель ===== */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:var(--red);
+    color:#fff8e7;
+    border-bottom:4px solid var(--gold);
+    box-shadow:0 6px 18px rgba(80,20,20,.24);
+  }
+  .topbar-inner{
+    width:min(1180px,92vw);margin-inline:auto;
+    min-height:66px;display:flex;align-items:center;gap:22px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:15px;white-space:nowrap}
+  .brand-star{
+    display:grid;place-items:center;width:36px;height:36px;border-radius:50%;
+    background:var(--gold);color:var(--red-dark);font-size:21px;
+    box-shadow:0 0 0 3px #fff4d2 inset;
+  }
+  .topnav{display:flex;gap:22px;margin-left:auto;font-size:14px;font-weight:700}
+  .topnav a{opacity:.88;transition:.2s}
+  .topnav a:hover{opacity:1;color:var(--gold)}
+  .topbar-cta{
+    background:var(--gold);color:#5a1a12;border-radius:999px;
+    padding:10px 19px;font-weight:800;font-size:14px;white-space:nowrap;
+    box-shadow:0 4px 0 #b77d0d;transition:.18s;
+  }
+  .topbar-cta:hover{transform:translateY(-2px);box-shadow:0 6px 0 #b77d0d}
+
+  /* ===== Герой ===== */
+  .hero{position:relative;overflow:hidden;padding:58px 0 0}
+  .hero::before{
+    content:"";position:absolute;inset:-20% -10% auto -10%;height:900px;
+    background:conic-gradient(from 0deg at 50% 34%,
+      rgba(244,180,26,.22) 0 7deg, transparent 7deg 15deg,
+      rgba(244,180,26,.22) 15deg 22deg, transparent 22deg 30deg,
+      rgba(244,180,26,.22) 30deg 37deg, transparent 37deg 45deg,
+      rgba(244,180,26,.22) 45deg 52deg, transparent 52deg 60deg,
+      rgba(244,180,26,.22) 60deg 67deg, transparent 67deg 75deg,
+      rgba(244,180,26,.22) 75deg 82deg, transparent 82deg 90deg,
+      rgba(244,180,26,.22) 90deg 97deg, transparent 97deg 105deg,
+      rgba(244,180,26,.22) 105deg 112deg, transparent 112deg 120deg,
+      rgba(244,180,26,.22) 120deg 127deg, transparent 127deg 135deg,
+      rgba(244,180,26,.22) 135deg 142deg, transparent 142deg 150deg,
+      rgba(244,180,26,.22) 150deg 157deg, transparent 157deg 165deg,
+      rgba(244,180,26,.22) 165deg 172deg, transparent 172deg 180deg,
+      rgba(244,180,26,.22) 180deg 187deg, transparent 187deg 195deg,
+      rgba(244,180,26,.22) 195deg 202deg, transparent 202deg 210deg,
+      rgba(244,180,26,.22) 210deg 217deg, transparent 217deg 225deg,
+      rgba(244,180,26,.22) 225deg 232deg, transparent 232deg 240deg,
+      rgba(244,180,26,.22) 240deg 247deg, transparent 247deg 255deg,
+      rgba(244,180,26,.22) 255deg 262deg, transparent 262deg 270deg,
+      rgba(244,180,26,.22) 270deg 277deg, transparent 277deg 285deg,
+      rgba(244,180,26,.22) 285deg 292deg, transparent 292deg 300deg,
+      rgba(244,180,26,.22) 300deg 307deg, transparent 307deg 315deg,
+      rgba(244,180,26,.22) 315deg 322deg, transparent 322deg 330deg,
+      rgba(244,180,26,.22) 330deg 337deg, transparent 337deg 345deg,
+      rgba(244,180,26,.22) 345deg 352deg, transparent 352deg 360deg);
+    pointer-events:none;
+  }
+  .hero-inner{position:relative;display:grid;grid-template-columns:1.02fr .98fr;gap:34px;align-items:center;min-height:600px}
+  .kicker{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:13px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--green);
+  }
+  .kicker::before,.kicker::after{content:"";width:34px;height:3px;background:var(--red);border-radius:2px}
+  .hero h1{
+    margin:20px 0 16px;
+    font-family:"Arial Black", Impact, sans-serif;
+    font-size:clamp(46px,6.2vw,82px);line-height:.93;
+    letter-spacing:-.02em;text-transform:uppercase;color:var(--red);
+    text-shadow:3px 3px 0 #fff, 6px 6px 0 rgba(141,29,34,.18);
+  }
+  .hero h1 em{font-style:normal;color:var(--blue);display:inline-block;transform:rotate(-2deg)}
+  .hero .lead{font-size:19px;line-height:1.55;max-width:520px;margin:0 0 26px;color:#45382b}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    padding:15px 24px;border-radius:4px;font-weight:800;font-size:16px;
+    text-transform:uppercase;letter-spacing:.04em;transition:.2s;border:2px solid transparent;
+  }
+  .btn-red{background:var(--red);color:#fff8e7;box-shadow:0 6px 0 var(--red-dark)}
+  .btn-red:hover{transform:translateY(-3px);box-shadow:0 9px 0 var(--red-dark)}
+  .btn-ghost{background:#fff8e7;border-color:var(--red);color:var(--red-dark)}
+  .btn-ghost:hover{background:#fff;transform:translateY(-3px)}
+  .hero-stats{
+    margin-top:30px;display:flex;gap:22px;flex-wrap:wrap;
+    font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);
+  }
+  .hero-stats span{display:flex;align-items:center;gap:7px}
+  .hero-stats span::before{content:"★";color:var(--gold);font-size:17px}
+
+  .hero-art{position:relative;filter:drop-shadow(0 20px 24px rgba(72,45,22,.18))}
+  .hero-art svg{display:block;width:100%;height:auto}
+  .sticker{
+    position:absolute;display:grid;place-items:center;text-align:center;
+    border-radius:50%;font-weight:900;text-transform:uppercase;line-height:1.05;
+    box-shadow:var(--shadow);border:4px solid #fff8e7;
+  }
+  .sticker-one{
+    width:120px;height:120px;right:-10px;top:8px;
+    background:var(--gold);color:#7a210f;font-size:15px;transform:rotate(11deg);
+  }
+  .sticker-two{
+    width:104px;height:104px;left:-16px;bottom:24px;
+    background:var(--green);color:#fff8e7;font-size:13px;transform:rotate(-9deg);
+  }
+  .torn-caption{
+    position:absolute;left:12%;bottom:-14px;background:var(--paper);
+    padding:10px 20px;font-size:13px;font-weight:800;color:var(--red-dark);
+    transform:rotate(-2deg);box-shadow:var(--shadow);
+    clip-path:polygon(0 12%,6% 0,14% 10%,23% 2%,33% 11%,44% 0,55% 10%,66% 1%,76% 11%,87% 0,100% 12%,97% 90%,88% 100%,77% 89%,65% 100%,54% 90%,43% 100%,32% 89%,21% 100%,10% 90%,2% 100%);
+  }
+
+  .ticker{
+    position:relative;z-index:2;overflow:hidden;margin-top:46px;
+    background:var(--red);border-top:4px solid var(--gold);border-bottom:4px solid var(--gold);
+    color:#fff4d7;padding:12px 0;font-weight:900;letter-spacing:.22em;text-transform:uppercase;font-size:14px;
+  }
+  .ticker-track{display:flex;width:max-content;animation:marquee 26s linear infinite}
+  .ticker-track span{padding-right:38px;white-space:nowrap}
+  .ticker-track b{color:var(--gold)}
+  @keyframes marquee{to{transform:translateX(-50%)}}
+
+  /* ===== Общие заголовки ===== */
+  .section{padding:88px 0}
+  .section-head{text-align:center;max-width:760px;margin:0 auto 44px}
+  .section-head .kicker{margin-bottom:14px}
+  .section-head h2{
+    margin:0 0 12px;font-family:"Arial Black",Impact,sans-serif;
+    text-transform:uppercase;font-size:clamp(32px,4vw,52px);line-height:1.02;color:var(--red);
+  }
+  .section-head p{margin:0;font-size:17px;line-height:1.6;color:var(--muted)}
+
+  /* ===== Карточки ===== */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .card{
+    position:relative;background:var(--paper);padding:26px 24px 28px;
+    border:2px solid rgba(141,29,34,.2);border-top:8px solid var(--red);
+    box-shadow:var(--shadow);transition:.25s;
+  }
+  .card:nth-child(2){border-top-color:var(--green);transform:rotate(1deg)}
+  .card:nth-child(3){border-top-color:var(--blue);transform:rotate(-1deg)}
+  .card:hover{transform:translateY(-8px) rotate(0)}
+  .card-ico{width:100%;height:130px}
+  .card-ico svg{width:100%;height:100%;display:block}
+  .card h3{margin:12px 0 8px;font-size:22px;color:var(--red-dark)}
+  .card p{margin:0;font-size:15px;line-height:1.55;color:#544633}
+  .card-num{
+    position:absolute;right:16px;top:14px;font-family:"Arial Black",sans-serif;
+    font-size:46px;color:rgba(193,39,45,.11);line-height:1;
+  }
+
+  /* ===== Кроссворд ===== */
+  .puzzle{background:
+      linear-gradient(180deg, rgba(36,102,168,.07), rgba(47,125,89,.09)),
+      radial-gradient(circle at 8% 10%, rgba(244,180,26,.18) 0 8%, transparent 8.4%),
+      var(--cream);
+    border-top:5px solid var(--blue);border-bottom:5px solid var(--blue);
+  }
+  .puzzle-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:34px;align-items:start}
+  .grid-panel{
+    background:var(--paper);padding:26px;border:3px solid var(--ink);
+    box-shadow:10px 10px 0 rgba(193,39,45,.18);
+  }
+  .grid-title{
+    display:flex;align-items:center;justify-content:space-between;gap:14px;
+    margin-bottom:18px;padding-bottom:12px;border-bottom:3px double var(--red);
+  }
+  .grid-title h3{margin:0;font-size:20px;text-transform:uppercase;letter-spacing:.05em;color:var(--red-dark)}
+  .grid-title span{font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase}
+  .grid-scroll{overflow-x:auto;padding:4px 2px 12px}
+  .grid-frame{
+    position:relative;display:inline-block;padding:12px;
+    background:
+      radial-gradient(circle at 10% 12%,rgba(244,180,26,.22) 0 3px,transparent 3.5px),
+      radial-gradient(circle at 88% 78%,rgba(193,39,45,.14) 0 4px,transparent 4.5px),
+      repeating-linear-gradient(45deg,#fff7e6 0 9px,#ffefcd 9px 18px);
+    border:3px solid var(--red);
+    box-shadow:inset 0 0 0 4px #fff8e7,var(--shadow);
+  }
+  .grid-frame::before,.grid-frame::after{
+    content:"★";position:absolute;color:var(--red);font-size:16px;line-height:1;
+  }
+  .grid-frame::before{left:-9px;top:-11px}
+  .grid-frame::after{right:-9px;bottom:-11px}
+  table.cw-grid{border-collapse:separate;border-spacing:3px;table-layout:fixed;margin:0 auto;min-width:560px}
+  table.cw-grid td{width:38px;height:38px;padding:0;position:relative;border:0}
+  table.cw-grid td.blank{
+    background:rgba(107,91,69,.07);border-radius:3px;
+    box-shadow:inset 0 0 0 1px rgba(107,91,69,.1);
+  }
+  table.cw-grid td.blank::after{
+    content:"";position:absolute;left:50%;top:50%;width:3px;height:3px;border-radius:50%;
+    background:rgba(107,91,69,.22);transform:translate(-50%,-50%);
+  }
+  table.cw-grid td.box{
+    background:linear-gradient(145deg,#fffdf6 0%,#f7eed9 100%);
+    border:1px solid #4b3b2a;border-radius:4px;overflow:hidden;
+    box-shadow:0 2px 0 rgba(72,45,22,.16),inset 0 1px 0 rgba(255,255,255,.9);
+  }
+  table.cw-grid td.box::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(circle at 20% 30%,rgba(193,39,45,.05) 0 1px,transparent 1.5px),
+               radial-gradient(circle at 70% 75%,rgba(36,102,168,.05) 0 1px,transparent 1.5px);
+  }
+  table.cw-grid td.box .n{
+    position:absolute;left:2px;top:2px;z-index:3;pointer-events:none;
+    min-width:15px;height:15px;padding:0 3px;border-radius:8px;
+    background:var(--red);color:#fff8e7;text-align:center;
+    font:800 9px/15px Arial,sans-serif;
+    box-shadow:0 1px 2px rgba(80,20,20,.35);
+  }
+  table.cw-grid td.box .n::after{
+    content:"";position:absolute;right:-6px;top:0;font-size:9px;font-weight:900;color:var(--blue);
+  }
+  table.cw-grid td.box .n.dir-across::after{content:"→"}
+  table.cw-grid td.box .n.dir-down::after{content:"↓"}
+  .cell{
+    position:relative;z-index:2;width:100%;height:100%;border:0;background:transparent;outline:0;
+    text-align:center;text-transform:uppercase;font:800 19px/1 Georgia,serif;color:var(--red-dark);
+    padding:7px 1px 1px;caret-color:var(--red);
+  }
+  td.box:focus-within{background:#fff3c4;box-shadow:0 2px 0 rgba(72,45,22,.16),inset 0 0 0 3px var(--gold);z-index:4}
+  td.box.right{background:linear-gradient(145deg,#e8f7df,#d3efcd)}
+  td.box.wrong{background:linear-gradient(145deg,#ffe9e5,#fbd7d2)}
+  td.box.hint{background:linear-gradient(145deg,#fff3cb,#ffe6a8)}
+  td.box.active-word{box-shadow:0 2px 0 rgba(72,45,22,.16),inset 0 0 0 3px var(--blue);z-index:4}
+  .grid-controls{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+  .mini-btn{
+    border:2px solid var(--red);background:transparent;color:var(--red-dark);
+    padding:10px 16px;font-weight:800;text-transform:uppercase;font-size:13px;border-radius:3px;transition:.18s;
+  }
+  .mini-btn:hover{background:var(--red);color:#fff8e7}
+  .mini-btn.solid{background:var(--blue);border-color:var(--blue);color:#fff}
+  .mini-btn.solid:hover{background:#174d80}
+  .status{min-height:22px;margin:14px 0 0;font-size:14px;font-weight:700;color:var(--green)}
+  .status.bad{color:var(--red-dark)}
+
+  .clue-panel{
+    background:var(--paper);border:3px solid var(--red);box-shadow:var(--shadow);padding:24px;
+  }
+  .clue-tabs{display:flex;gap:8px;margin-bottom:18px}
+  .clue-tabs button{
+    flex:1;border:2px solid var(--red);background:#fff3e2;color:var(--red-dark);
+    padding:11px 8px;font-weight:800;text-transform:uppercase;font-size:13px;border-radius:3px;
+  }
+  .clue-tabs button.active{background:var(--red);color:#fff8e7}
+  .clue-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+  .clue-list li{display:none}
+  .clue-list li.show{display:block}
+  .clue-list button{
+    width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;
+    border:1px solid rgba(63,52,39,.18);background:#fffdf6;padding:11px 12px;border-radius:3px;
+    font-size:14px;line-height:1.4;color:#3f3427;transition:.16s;
+  }
+  .clue-list button:hover,.clue-list button.picked{border-color:var(--blue);background:#eef5fc;transform:translateX(3px)}
+  .clue-list .num{
+    flex:0 0 28px;height:28px;display:grid;place-items:center;border-radius:50%;
+    background:var(--gold);color:#6d1c11;font-weight:900;font-size:13px;
+  }
+  .clue-hint{margin:18px 0 0;font-size:13px;color:var(--muted);line-height:1.5}
+
+  /* ===== Баннер-история ===== */
+  .story{position:relative;overflow:hidden;background:var(--green);color:#fff8e7;padding:0}
+  .story-inner{display:grid;grid-template-columns:.95fr 1.05fr;gap:30px;align-items:center;min-height:390px;padding:50px 0}
+  .story-art svg{width:100%;height:auto;display:block;filter:drop-shadow(0 14px 20px rgba(0,0,0,.2))}
+  .story-copy .kicker{color:#ffe08a}
+  .story-copy .kicker::before,.story-copy .kicker::after{background:#ffe08a}
+  .story-copy h2{font-family:"Arial Black",Impact,sans-serif;text-transform:uppercase;font-size:clamp(30px,4vw,50px);line-height:1;margin:16px 0}
+  .story-copy p{font-size:17px;line-height:1.65;max-width:520px;color:#f4ead6}
+  .story-quote{
+    margin-top:24px;padding:16px 20px;border-left:5px solid var(--gold);
+    background:rgba(0,0,0,.12);font-size:18px;font-style:italic;font-weight:700;
+  }
+
+  /* ===== Ответы ===== */
+  .answers-detail{background:var(--paper);border:3px solid var(--gold);box-shadow:var(--shadow)}
+  .answers-detail summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:12px;
+    padding:22px;font-family:"Arial Black",Impact,sans-serif;text-transform:uppercase;
+    font-size:22px;color:var(--red);background:#fff2cf;
+  }
+  .answers-detail summary::-webkit-details-marker{display:none}
+  .answers-detail summary::before{content:"★";color:var(--gold)}
+  .answers-detail[open] summary{border-bottom:3px solid var(--gold)}
+  .answer-cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;padding:30px}
+  .answer-cols h3{margin:0 0 14px;color:var(--red-dark);font-size:19px;text-transform:uppercase;border-bottom:2px solid var(--red);padding-bottom:8px}
+  .answer-cols p{margin:0 0 9px;font-size:17px;line-height:1.4}
+  .answer-cols b{display:inline-block;min-width:32px;color:var(--red)}
+  .answer-cols strong{letter-spacing:.08em;color:var(--green)}
+
+  /* ===== Подвал ===== */
+  footer{background:var(--red-dark);color:#fff2d8;padding:42px 0 30px;text-align:center;border-top:6px solid var(--gold)}
+  footer .foot-star{font-size:30px;color:var(--gold)}
+  footer h3{margin:6px 0;font-family:"Arial Black",Impact,sans-serif;text-transform:uppercase;letter-spacing:.06em}
+  footer p{margin:6px 0;font-size:14px;opacity:.82}
+  .foot-line{width:80px;height:3px;background:var(--gold);margin:18px auto}
+
+  @media (max-width:980px){
+    .hero-inner{grid-template-columns:1fr;min-height:auto;padding-bottom:20px}
+    .hero-art{max-width:660px;margin:0 auto;width:100%}
+    .puzzle-layout{grid-template-columns:1fr}
+    .clue-panel{order:-1}
+    .cards{grid-template-columns:1fr 1fr}
+    .story-inner{grid-template-columns:1fr}
+    .story-art{max-width:620px;margin:0 auto;width:100%}
+  }
+  @media (max-width:640px){
+    .topnav{display:none}
+    .topbar-cta{margin-left:auto;padding:8px 13px;font-size:12px}
+    .brand{font-size:12px}
+    .hero{padding-top:36px}
+    .hero h1{font-size:44px}
+    .section{padding:60px 0}
+    .cards{grid-template-columns:1fr}
+    .grid-panel{padding:16px}
+    .grid-title{flex-direction:column;align-items:flex-start}
+    .grid-frame{padding:8px}
+    table.cw-grid td{width:32px;height:32px}
+    table.cw-grid{min-width:512px}
+    .sticker-one{width:92px;height:92px;font-size:12px}
+    .sticker-two{width:82px;height:82px;font-size:11px}
+    .answer-cols{grid-template-columns:1fr;padding:22px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .ticker-track{animation:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top"><span class="brand-star">★</span> Отряд «Солнышко»</a>
+    <nav class="topnav" aria-label="Навигация">
+      <a href="#about">О кроссворде</a>
+      <a href="#crossword">Задания</a>
+      <a href="#story">В лагере</a>
+      <a href="#answers">Ответы</a>
+    </nav>
+    <a class="topbar-cta" href="#crossword">Разгадать →</a>
+  </div>
+</header>
+
+<main>
+  <!-- ===== ГЕРОЙ ===== -->
+  <section class="hero" id="top">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <div class="kicker">Пионерский лагерь · лето</div>
+        <h1>Каникулы<br><em>Петрова</em><br>и Васечкина</h1>
+        <p class="lead">Прыгай в лето 1984-го: палатки, гуси, рогатки и друзья. Собери 13 слов из любимого фильма и проверь себя на «отлично!»</p>
+        <div class="hero-actions">
+          <a class="btn btn-red" href="#crossword">Начать разгадывать <span aria-hidden="true">→</span></a>
+          <a class="btn btn-ghost" href="#answers">Нужна подсказка?</a>
+        </div>
+        <div class="hero-stats">
+          <span>13 слов</span><span>5 минут</span><span>1–4 класс</span>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <!-- Акварельная иллюстрация: Петров и Васечкин в лагере -->
+        <svg viewBox="0 0 620 470" role="img" aria-label="Акварельная иллюстрация: два пионера у палатки в летнем лагере">
+          <defs>
+            <filter id="heroWc" x="-8%" y="-8%" width="116%" height="116%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.028" numOctaves="3" seed="8" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="5"/>
+            </filter>
+            <filter id="heroSoft" x="-10%" y="-10%" width="120%" height="120%">
+              <feGaussianBlur stdDeviation="7"/>
+            </filter>
+            <radialGradient id="heroSun"><stop offset="0%" stop-color="#ffe9a8"/><stop offset="62%" stop-color="#ffc236"/><stop offset="100%" stop-color="#ffb300" stop-opacity="0"/></radialGradient>
+            <linearGradient id="heroTent" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#8dc36a"/><stop offset="100%" stop-color="#3f8a4f"/></linearGradient>
+            <linearGradient id="heroTentDark" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4f9c58"/><stop offset="100%" stop-color="#2f6d3e"/></linearGradient>
+          </defs>
+          <g filter="url(#heroWc)">
+            <!-- акварельные пятна -->
+            <ellipse cx="310" cy="404" rx="270" ry="42" fill="#79a95b" opacity=".35" filter="url(#heroSoft)"/>
+            <ellipse cx="120" cy="120" rx="70" ry="62" fill="#f4b41a" opacity=".2" filter="url(#heroSoft)"/>
+            <ellipse cx="520" cy="300" rx="64" ry="70" fill="#2466a8" opacity=".13" filter="url(#heroSoft)"/>
+            <!-- солнце -->
+            <circle cx="486" cy="92" r="66" fill="url(#heroSun)"/>
+            <circle cx="486" cy="92" r="38" fill="#ffca28" opacity=".8"/>
+            <g stroke="#f2a007" stroke-width="4" stroke-linecap="round" opacity=".65">
+              <line x1="486" y1="12" x2="486" y2="28"/><line x1="486" y1="156" x2="486" y2="172"/>
+              <line x1="406" y1="92" x2="422" y2="92"/><line x1="550" y1="92" x2="566" y2="92"/>
+              <line x1="430" y1="36" x2="441" y2="47"/><line x1="531" y1="137" x2="542" y2="148"/>
+              <line x1="430" y1="148" x2="441" y2="137"/><line x1="531" y1="47" x2="542" y2="36"/>
+            </g>
+            <!-- берёзы -->
+            <g opacity=".85">
+              <path d="M78 372 Q84 260 76 150" stroke="#efe7d4" stroke-width="13" fill="none"/>
+              <path d="M83 300 L102 283 M80 250 L62 232" stroke="#3b3327" stroke-width="4"/>
+              <ellipse cx="80" cy="172" rx="46" ry="58" fill="#6fa257" opacity=".75"/>
+              <ellipse cx="104" cy="210" rx="32" ry="38" fill="#8dbb6b" opacity=".65"/>
+            </g>
+            <!-- палатка -->
+            <ellipse cx="216" cy="392" rx="120" ry="12" fill="#6b5b45" opacity=".28"/>
+            <path d="M98 386 L212 168 L326 386 Z" fill="url(#heroTent)"/>
+            <path d="M212 168 L212 386 L326 386 Z" fill="url(#heroTentDark)" opacity=".72"/>
+            <path d="M188 386 L212 292 L236 386 Z" fill="#2a5932"/>
+            <path d="M212 168 L212 142" stroke="#6d4c41" stroke-width="4"/>
+            <path d="M212 142 L248 150 L212 158 Z" fill="#c1272d"/>
+            <!-- Васечкин -->
+            <g transform="translate(352,150)">
+              <ellipse cx="34" cy="228" rx="40" ry="9" fill="#6b5b45" opacity=".25"/>
+              <circle cx="34" cy="38" r="30" fill="#ffd7a6"/>
+              <path d="M4 32 Q6 3 34 3 Q62 3 64 32 Q52 17 34 17 Q16 17 4 32 Z" fill="#f4b41a"/>
+              <circle cx="23" cy="39" r="2.6" fill="#3a2c20"/><circle cx="45" cy="39" r="2.6" fill="#3a2c20"/>
+              <path d="M26 51 Q34 58 42 51" stroke="#8a5a3c" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+              <path d="M13 70 L55 70 L61 174 L7 174 Z" fill="#2466a8"/>
+              <path d="M28 70 L34 100 L40 70" fill="none" stroke="#c1272d" stroke-width="5"/>
+              <path d="M25 96 L43 96 L39 126 L29 126 Z" fill="#c1272d"/>
+              <path d="M14 174 L10 216 L28 216 L30 174 Z M40 174 L42 216 L60 216 L56 174 Z" fill="#3b4f77"/>
+              <path d="M55 100 Q85 88 92 120" stroke="#ffd7a6" stroke-width="13" fill="none" stroke-linecap="round"/>
+            </g>
+            <!-- Петров -->
+            <g transform="translate(452,168)">
+              <ellipse cx="34" cy="210" rx="38" ry="8" fill="#6b5b45" opacity=".25"/>
+              <circle cx="34" cy="36" r="29" fill="#ffcf99"/>
+              <path d="M5 31 Q7 2 34 2 Q61 2 63 31 Q50 16 34 16 Q18 16 5 31 Z" fill="#4a3527"/>
+              <circle cx="23" cy="37" r="2.6" fill="#3a2c20"/><circle cx="45" cy="37" r="2.6" fill="#3a2c20"/>
+              <path d="M26 49 Q34 56 42 49" stroke="#8a5a3c" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+              <path d="M13 66 L55 66 L60 160 L8 160 Z" fill="#6fa257"/>
+              <path d="M28 66 L34 94 L40 66" fill="none" stroke="#c1272d" stroke-width="5"/>
+              <path d="M25 90 L43 90 L39 118 L29 118 Z" fill="#c1272d"/>
+              <path d="M14 160 L10 198 L28 198 L30 160 Z M40 160 L42 198 L60 198 L56 160 Z" fill="#4a3527"/>
+              <path d="M10 94 Q-15 84 -18 112" stroke="#ffcf99" stroke-width="12" fill="none" stroke-linecap="round"/>
+            </g>
+            <!-- гусь -->
+            <g transform="translate(96,318)">
+              <ellipse cx="62" cy="56" rx="48" ry="26" fill="#fffdf5" stroke="#d4cbb8" stroke-width="2"/>
+              <path d="M30 48 Q22 22 30 8 Q38 1 44 10 Q40 30 46 50" fill="#fffdf5" stroke="#d4cbb8" stroke-width="2"/>
+              <circle cx="36" cy="8" r="14" fill="#fffdf5" stroke="#d4cbb8" stroke-width="2"/>
+              <path d="M22 8 L7 11 L22 16 Z" fill="#f2a007"/>
+              <circle cx="34" cy="6" r="2" fill="#333"/>
+              <path d="M108 48 L124 40 L114 52 L124 60 L108 60 Z" fill="#f0ead9"/>
+            </g>
+            <!-- кляксы -->
+            <g fill="#c1272d" opacity=".38">
+              <circle cx="290" cy="116" r="5"/><circle cx="306" cy="104" r="3"/><circle cx="276" cy="98" r="2.5"/>
+            </g>
+            <g fill="#2466a8" opacity=".3">
+              <circle cx="560" cy="250" r="6"/><circle cx="548" cy="238" r="3"/>
+            </g>
+          </g>
+        </svg>
+        <div class="sticker sticker-one">лето<br>1984</div>
+        <div class="sticker sticker-two">отряд<br>солнышко</div>
+        <div class="torn-caption">«А я буду знаменитым!» — Васечкин</div>
+      </div>
+    </div>
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Лето <b>★</b> Дружба <b>★</b> Палатки <b>★</b> Приключения <b>★</b> Пионеры <b>★</b> Гуси <b>★</b> Рогатки <b>★</b> </span>
+        <span>Лето <b>★</b> Дружба <b>★</b> Палатки <b>★</b> Приключения <b>★</b> Пионеры <b>★</b> Гуси <b>★</b> Рогатки <b>★</b> </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== КАРТОЧКИ ===== -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Что внутри</div>
+        <h2>Всё как в настоящем лагере</h2>
+        <p>Три больших повода включить воображение. Акварельные карточки и знакомые лица из фильма ждут тебя ниже.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <span class="card-num">01</span>
+          <div class="card-ico">
+            <svg viewBox="0 0 200 130" role="img" aria-label="Акварельная палатка">
+              <defs><filter id="ic1" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter><linearGradient id="ic1g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9ccc65"/><stop offset="1" stop-color="#3f7d4a"/></linearGradient></defs>
+              <g filter="url(#ic1)"><ellipse cx="100" cy="116" rx="80" ry="8" fill="#6b5b45" opacity=".25"/><path d="M26 112 L100 20 L174 112 Z" fill="url(#ic1g)"/><path d="M100 20 L100 112 L174 112 Z" fill="#35733f" opacity=".6"/><path d="M84 112 L100 72 L116 112 Z" fill="#25512f"/><path d="M100 20 L100 8" stroke="#6d4c41" stroke-width="3"/><path d="M100 8 L124 13 L100 18 Z" fill="#c1272d"/></g>
+            </svg>
+          </div>
+          <h3>Лагерь и палатки</h3>
+          <p>Вспомни, где жили Петров с Васечкиным, и разгадай первое слово по вертикали.</p>
+        </article>
+        <article class="card">
+          <span class="card-num">02</span>
+          <div class="card-ico">
+            <svg viewBox="0 0 200 130" role="img" aria-label="Акварельный гусь">
+              <defs><filter id="ic2" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="6"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter></defs>
+              <g filter="url(#ic2)"><ellipse cx="112" cy="88" rx="58" ry="30" fill="#fffdf5" stroke="#d4cbb8" stroke-width="2"/><path d="M68 80 Q56 44 66 20 Q76 10 84 22 Q78 52 88 82" fill="#fffdf5" stroke="#d4cbb8" stroke-width="2"/><circle cx="72" cy="20" r="15" fill="#fffdf5" stroke="#d4cbb8" stroke-width="2"/><path d="M57 20 L38 24 L57 29 Z" fill="#f2a007"/><circle cx="70" cy="18" r="2.2" fill="#333"/><path d="M166 78 L186 68 L172 82 L186 92 L166 92 Z" fill="#eee7d6"/><ellipse cx="112" cy="118" rx="62" ry="5" fill="#6b5b45" opacity=".18"/></g>
+            </svg>
+          </div>
+          <h3>Гусь-хулиган</h3>
+          <p>Он шипит и не даёт прохода Тяпкину. Угадай его имя — оно стало ключом к кроссворду.</p>
+        </article>
+        <article class="card">
+          <span class="card-num">03</span>
+          <div class="card-ico">
+            <svg viewBox="0 0 200 130" role="img" aria-label="Акварельная рогатка">
+              <defs><filter id="ic3" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="9"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter><linearGradient id="ic3g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9c6b45"/><stop offset="1" stop-color="#5d3b24"/></linearGradient></defs>
+              <g filter="url(#ic3)"><path d="M96 56 L104 56 L106 118 L94 118 Z" fill="url(#ic3g)"/><path d="M100 58 L60 18 L50 26 L92 62 Z" fill="url(#ic3g)"/><path d="M100 58 L140 18 L150 26 L108 62 Z" fill="url(#ic3g)"/><path d="M55 24 Q100 62 145 24" stroke="#c1272d" stroke-width="4" fill="none"/><path d="M88 44 L112 44 L108 56 L92 56 Z" fill="#4a3527"/><circle cx="100" cy="49" r="3" fill="#8d8d8d"/></g>
+            </svg>
+          </div>
+          <h3>Рогатка и шалости</h3>
+          <p>Любимая игрушка Васечкина. Она тоже спряталась в сетке — найди её по горизонтали.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== КРОССВОРД ===== -->
+  <section class="section puzzle" id="crossword">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Главное задание</div>
+        <h2>Разгадай кроссворд</h2>
+        <p>Кликни по вопросу, чтобы подсветить слова. Пиши буквы в клетки, стрелки переводят курсор. Проверка — в один клик!</p>
+      </div>
+
+      <div class="puzzle-layout">
+        <div class="grid-panel">
+          <div class="grid-title">
+            <h3>Сетка 16 × 15</h3>
+            <span>13 слов · 64 клетки</span>
+          </div>
+          <div class="grid-scroll">
+            <div class="grid-frame">
+            <table class="cw-grid" aria-label="Кроссворд по фильму «Каникулы Петрова и Васечкина»">
+              <tbody>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 1, столбец 3" data-r="1" data-c="3"><span class="n">1</span></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 1, столбец 5" data-r="1" data-c="5"><span class="n">2</span></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 1, столбец 7" data-r="1" data-c="7"><span class="n">3</span></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 2, столбец 2" data-r="2" data-c="2"><span class="n">4</span></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 2, столбец 3" data-r="2" data-c="3"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 2, столбец 4" data-r="2" data-c="4"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 2, столбец 5" data-r="2" data-c="5"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 2, столбец 6" data-r="2" data-c="6"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 2, столбец 7" data-r="2" data-c="7"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 2, столбец 8" data-r="2" data-c="8"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 2, столбец 9" data-r="2" data-c="9"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 3, столбец 3" data-r="3" data-c="3"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 3, столбец 5" data-r="3" data-c="5"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 3, столбец 7" data-r="3" data-c="7"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 3, столбец 11" data-r="3" data-c="11"><span class="n">5</span></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 4, столбец 3" data-r="4" data-c="3"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 4, столбец 5" data-r="4" data-c="5"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 4, столбец 7" data-r="4" data-c="7"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 4, столбец 9" data-r="4" data-c="9"><span class="n">6</span></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 4, столбец 11" data-r="4" data-c="11"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 5, столбец 3" data-r="5" data-c="3"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 5, столбец 5" data-r="5" data-c="5"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 5, столбец 9" data-r="5" data-c="9"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 5, столбец 11" data-r="5" data-c="11"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 6, столбец 3" data-r="6" data-c="3"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 6, столбец 5" data-r="6" data-c="5"><span class="n">7</span></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 6, столбец 6" data-r="6" data-c="6"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 6, столбец 7" data-r="6" data-c="7"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 6, столбец 8" data-r="6" data-c="8"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 6, столбец 9" data-r="6" data-c="9"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 6, столбец 10" data-r="6" data-c="10"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 6, столбец 11" data-r="6" data-c="11"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 7, столбец 9" data-r="7" data-c="9"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 8, столбец 6" data-r="8" data-c="6"><span class="n">8</span></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 8, столбец 7" data-r="8" data-c="7"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 8, столбец 8" data-r="8" data-c="8"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 8, столбец 9" data-r="8" data-c="9"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 8, столбец 12" data-r="8" data-c="12"><span class="n">9</span></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 8, столбец 15" data-r="8" data-c="15"><span class="n">10</span></td>
+        <td class="blank" aria-hidden="true"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 9, столбец 9" data-r="9" data-c="9"><span class="n">11</span></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 9, столбец 10" data-r="9" data-c="10"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 9, столбец 11" data-r="9" data-c="11"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 9, столбец 12" data-r="9" data-c="12"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 9, столбец 13" data-r="9" data-c="13"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 9, столбец 14" data-r="9" data-c="14"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 9, столбец 15" data-r="9" data-c="15"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 9, столбец 16" data-r="9" data-c="16"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 10, столбец 12" data-r="10" data-c="12"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 10, столбец 15" data-r="10" data-c="15"></td>
+        <td class="blank" aria-hidden="true"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 11, столбец 15" data-r="11" data-c="15"></td>
+        <td class="blank" aria-hidden="true"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 12, столбец 10" data-r="12" data-c="10"><span class="n">12</span></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 12, столбец 15" data-r="12" data-c="15"></td>
+        <td class="blank" aria-hidden="true"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 13, столбец 10" data-r="13" data-c="10"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 13, столбец 15" data-r="13" data-c="15"></td>
+        <td class="blank" aria-hidden="true"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 14, столбец 8" data-r="14" data-c="8"><span class="n">13</span></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 14, столбец 9" data-r="14" data-c="9"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 14, столбец 10" data-r="14" data-c="10"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 14, столбец 11" data-r="14" data-c="11"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 14, столбец 12" data-r="14" data-c="12"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 14, столбец 13" data-r="14" data-c="13"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 14, столбец 14" data-r="14" data-c="14"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 14, столбец 15" data-r="14" data-c="15"></td>
+        <td class="blank" aria-hidden="true"></td>
+      </tr>
+      <tr>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 15, столбец 10" data-r="15" data-c="10"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="blank" aria-hidden="true"></td>
+        <td class="box"><input class="cell" type="text" maxlength="1" autocomplete="off" spellcheck="false" aria-label="Буква, строка 15, столбец 15" data-r="15" data-c="15"></td>
+        <td class="blank" aria-hidden="true"></td>
+      </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+          <div class="grid-controls">
+            <button class="mini-btn solid" id="checkBtn" type="button">✓ Проверить</button>
+            <button class="mini-btn" id="hintBtn" type="button">Подсказка</button>
+            <button class="mini-btn" id="clearBtn" type="button">Очистить</button>
+          </div>
+          <p class="status" id="status" role="status" aria-live="polite"></p>
+        </div>
+
+        <aside class="clue-panel">
+          <div class="clue-tabs" role="tablist">
+            <button type="button" class="active" data-tab="across" role="tab" aria-selected="true">По горизонтали →</button>
+            <button type="button" data-tab="down" role="tab" aria-selected="false">По вертикали ↓</button>
+          </div>
+
+          <ol class="clue-list" id="clueList">
+            <li class="show" data-dir="across" data-n="4"><button type="button"><span class="num">4</span><span>Летом в школе не учатся. Почему? Потому что у детей…</span></button></li>
+            <li class="show" data-dir="across" data-n="7"><button type="button"><span class="num">7</span><span>Игрушка, из которой стреляют камешками.</span></button></li>
+            <li class="show" data-dir="across" data-n="8"><button type="button"><span class="num">8</span><span>Самое тёплое время года, когда не надо ходить в школу.</span></button></li>
+            <li class="show" data-dir="across" data-n="11"><button type="button"><span class="num">11</span><span>Фамилия друга Петрова, который всё время придумывает шалости.</span></button></li>
+            <li class="show" data-dir="across" data-n="13"><button type="button"><span class="num">13</span><span>Здание с большими крыльями, где мелют зерно.</span></button></li>
+
+            <li data-dir="down" data-n="1"><button type="button"><span class="num">1</span><span>Куда приехали отдыхать Петров и Васечкина? Там живут в домиках и палатках.</span></button></li>
+            <li data-dir="down" data-n="2"><button type="button"><span class="num">2</span><span>Школьник в красном галстуке в советское время.</span></button></li>
+            <li data-dir="down" data-n="3"><button type="button"><span class="num">3</span><span>Птица, которая шипит. И так же звали хулигана из фильма.</span></button></li>
+            <li data-dir="down" data-n="5"><button type="button"><span class="num">5</span><span>Как звали девочку, в которую был влюблён Петров?</span></button></li>
+            <li data-dir="down" data-n="6"><button type="button"><span class="num">6</span><span>Фамилия одного из двух главных друзей. Как его зовут? Вася…</span></button></li>
+            <li data-dir="down" data-n="9"><button type="button"><span class="num">9</span><span>Старинное оружие рыцаря.</span></button></li>
+            <li data-dir="down" data-n="10"><button type="button"><span class="num">10</span><span>Сладкая ягода, которая растёт гроздьями.</span></button></li>
+            <li data-dir="down" data-n="12"><button type="button"><span class="num">12</span><span>Серый хищник, который в сказках ест Красную Шапочку.</span></button></li>
+          </ol>
+          <p class="clue-hint">Совет вожатого: пересекающиеся буквы должны совпадать. Если зашли в тупик — нажми «Подсказка».</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== БАННЕР ===== -->
+  <section class="story" id="story">
+    <div class="wrap story-inner">
+      <div class="story-art">
+        <svg viewBox="0 0 620 360" role="img" aria-label="Акварельный рисунок летнего пионерского лагеря">
+          <defs>
+            <filter id="campWc" x="-8%" y="-8%" width="116%" height="116%"><feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" seed="12"/><feDisplacementMap in="SourceGraphic" scale="4"/></filter>
+            <filter id="campBlur"><feGaussianBlur stdDeviation="8"/></filter>
+            <linearGradient id="campSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe3f2"/><stop offset="1" stop-color="#f6efdc"/></linearGradient>
+          </defs>
+          <g filter="url(#campWc)">
+            <rect x="0" y="0" width="620" height="360" fill="url(#campSky)" opacity=".85"/>
+            <circle cx="520" cy="66" r="52" fill="#ffca28" opacity=".75"/>
+            <ellipse cx="310" cy="318" rx="330" ry="44" fill="#5c9b62" opacity=".65" filter="url(#campBlur)"/>
+            <!-- мельница -->
+            <g transform="translate(395,120)">
+              <path d="M22 200 L32 74 L72 74 L82 200 Z" fill="#e4d3bd" stroke="#8a6f57" stroke-width="2"/>
+              <path d="M18 74 L52 42 L86 74 Z" fill="#9c6b45"/>
+              <rect x="44" y="152" width="18" height="48" fill="#5d3b24"/>
+              <g transform="translate(52,62)" stroke="#7c5637" stroke-width="6">
+                <path d="M0 0 L-5 -46"/><path d="M0 0 L46 -5"/><path d="M0 0 L5 46"/><path d="M0 0 L-46 5"/>
+              </g>
+              <circle cx="52" cy="62" r="8" fill="#5d3b24"/>
+            </g>
+            <!-- домик -->
+            <g transform="translate(72,168)">
+              <path d="M0 58 L56 10 L112 58 Z" fill="#c1272d"/>
+              <rect x="12" y="58" width="88" height="76" fill="#f3e3c4" stroke="#8a6f57" stroke-width="2"/>
+              <rect x="48" y="88" width="26" height="46" fill="#6d4c41"/>
+              <rect x="22" y="72" width="16" height="16" fill="#2466a8"/>
+              <rect x="76" y="72" width="16" height="16" fill="#2466a8"/>
+            </g>
+            <!-- гусь -->
+            <g transform="translate(252,236)">
+              <ellipse cx="42" cy="36" rx="40" ry="21" fill="#fffdf5" stroke="#d4cbb8" stroke-width="2"/>
+              <path d="M20 30 Q14 12 20 4 Q27 -1 31 7 Q27 22 34 32" fill="#fffdf5" stroke="#d4cbb8" stroke-width="2"/>
+              <circle cx="24" cy="4" r="11" fill="#fffdf5" stroke="#d4cbb8" stroke-width="2"/>
+              <path d="M13 4 L2 6 L13 9 Z" fill="#f2a007"/><circle cx="23" cy="3" r="1.8" fill="#333"/>
+            </g>
+            <!-- виноград -->
+            <g transform="translate(180,60)">
+              <path d="M28 0 Q44 -12 54 4 Q64 -4 70 10 Q52 22 28 14 Z" fill="#5c9b62"/>
+              <g fill="#7e3f8c"><circle cx="20" cy="30" r="9"/><circle cx="38" cy="30" r="9"/><circle cx="29" cy="46" r="9"/><circle cx="47" cy="46" r="9"/><circle cx="38" cy="62" r="9"/></g>
+              <g fill="#a35ab0" opacity=".7"><circle cx="18" cy="28" r="3"/><circle cx="36" cy="44" r="3"/></g>
+            </g>
+            <!-- флажок -->
+            <path d="M590 300 L590 150" stroke="#6d4c41" stroke-width="4"/>
+            <path d="M590 152 L548 164 L590 178 Z" fill="#c1272d"/>
+          </g>
+        </svg>
+      </div>
+      <div class="story-copy">
+        <div class="kicker">Из фильма</div>
+        <h2>Обыкновенные и невероятные каникулы</h2>
+        <p>Вожатый говорит, что лагерь — это место, где даже самое обычное утро превращается в приключение. Проверь, помнишь ли ты каждую мелочь.</p>
+        <div class="story-quote">«Ребята, давайте жить дружно!» — ну почти. Здесь живут весело.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ОТВЕТЫ ===== -->
+  <section class="section" id="answers">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Для вожатого</div>
+        <h2>Ответы и проверка</h2>
+        <p>Загляни сюда, если слово никак не всплывает в памяти. Только сначала попробуй сам — честный пионер так делает!</p>
+      </div>
+      <details class="answers-detail">
+        <summary>Показать все ответы</summary>
+        <div class="answer-cols">
+          <div>
+            <h3>По горизонтали →</h3>
+            <p><b>4.</b> <strong>КАНИКУЛЫ</strong></p>
+            <p><b>7.</b> <strong>РОГАТКА</strong></p>
+            <p><b>8.</b> <strong>ЛЕТО</strong></p>
+            <p><b>11.</b> <strong>ВАСЕЧКИН</strong></p>
+            <p><b>13.</b> <strong>МЕЛЬНИЦА</strong></p>
+          </div>
+          <div>
+            <h3>По вертикали ↓</h3>
+            <p><b>1.</b> <strong>ЛАГЕРЬ</strong></p>
+            <p><b>2.</b> <strong>ПИОНЕР</strong></p>
+            <p><b>3.</b> <strong>ГУСЬ</strong></p>
+            <p><b>5.</b> <strong>МАША</strong></p>
+            <p><b>6.</b> <strong>ПЕТРОВ</strong></p>
+            <p><b>9.</b> <strong>МЕЧ</strong></p>
+            <p><b>10.</b> <strong>ВИНОГРАД</strong></p>
+            <p><b>12.</b> <strong>ВОЛК</strong></p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-star">★</div>
+    <h3>Отряд «Солнышко» желает удачи!</h3>
+    <p>Кроссворд по мотивам фильма «Каникулы Петрова и Васечкина»</p>
+    <div class="foot-line"></div>
+    <p>Лето · дружба · приключения · 1984</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  const WORDS = [
+    {n:4,  dir:"across", start:[2,2],  answer:"КАНИКУЛЫ"},
+    {n:7,  dir:"across", start:[6,5],  answer:"РОГАТКА"},
+    {n:8,  dir:"across", start:[8,6],  answer:"ЛЕТО"},
+    {n:11, dir:"across", start:[9,9],  answer:"ВАСЕЧКИН"},
+    {n:13, dir:"across", start:[14,8], answer:"МЕЛЬНИЦА"},
+    {n:1,  dir:"down",   start:[1,3],  answer:"ЛАГЕРЬ"},
+    {n:2,  dir:"down",   start:[1,5],  answer:"ПИОНЕР"},
+    {n:3,  dir:"down",   start:[1,7],  answer:"ГУСЬ"},
+    {n:5,  dir:"down",   start:[3,11], answer:"МАША"},
+    {n:6,  dir:"down",   start:[4,9],  answer:"ПЕТРОВ"},
+    {n:9,  dir:"down",   start:[8,12], answer:"МЕЧ"},
+    {n:10, dir:"down",   start:[8,15], answer:"ВИНОГРАД"},
+    {n:12, dir:"down",   start:[12,10],answer:"ВОЛК"}
+  ];
+
+  const byNum = {};
+  WORDS.forEach(function(w){
+    w.cells = [];
+    for(let i=0;i<w.answer.length;i++){
+      w.cells.push(w.dir === "across" ? [w.start[0], w.start[1]+i] : [w.start[0]+i, w.start[1]]);
+    }
+    byNum[w.n] = w;
+  });
+
+  document.querySelectorAll(".cw-grid .n").forEach(function(badge){
+    const w = byNum[badge.textContent.trim()];
+    if(w) badge.classList.add(w.dir === "across" ? "dir-across" : "dir-down");
+  });
+
+  const correct = {};
+  WORDS.forEach(function(w){
+    w.cells.forEach(function(pos, i){
+      const key = pos[0] + ":" + pos[1];
+      (correct[key] || (correct[key] = new Set())).add(w.answer[i]);
+    });
+  });
+
+  const cellEls = Array.from(document.querySelectorAll("td.box"));
+  const cellMap = {};
+  cellEls.forEach(function(td){
+    const input = td.querySelector(".cell");
+    cellMap[td.dataset.r + ":" + td.dataset.c] = {td:td, input:input};
+  });
+
+  const statusEl = document.getElementById("status");
+  const checkBtn = document.getElementById("checkBtn");
+  const hintBtn = document.getElementById("hintBtn");
+  const clearBtn = document.getElementById("clearBtn");
+  const clueItems = Array.from(document.querySelectorAll("#clueList li"));
+
+  function norm(v){ return (v || "").trim().toUpperCase(); }
+  function entry(r,c){ return cellMap[r + ":" + c]; }
+  function wordIsSolved(w){
+    return w.cells.every(function(pos,i){
+      return norm(entry(pos[0],pos[1]).input.value) === w.answer[i];
+    });
+  }
+  function clearMarks(){
+    cellEls.forEach(function(td){ td.classList.remove("right","wrong","hint","active-word"); });
+  }
+  function setStatus(text,bad){
+    statusEl.textContent = text;
+    statusEl.classList.toggle("bad", !!bad);
+  }
+
+  checkBtn.addEventListener("click", function(){
+    clearMarks();
+    let solved = 0;
+    WORDS.forEach(function(w){ if(wordIsSolved(w)) solved++; });
+
+    Object.keys(correct).forEach(function(key){
+      const e = cellMap[key];
+      const val = norm(e.input.value);
+      if(!val) return;
+      e.td.classList.add(correct[key].has(val) ? "right" : "wrong");
+    });
+
+    if(solved === WORDS.length){
+      setStatus("Ура! Все 13 слов разгаданы верно. Ты настоящий пионер! ★");
+    }else{
+      setStatus("Правильно слов: " + solved + " из " + WORDS.length + ". Красные клетки нужно исправить.", solved === 0);
+    }
+  });
+
+  clearBtn.addEventListener("click", function(){
+    cellEls.forEach(function(td){
+      td.querySelector(".cell").value = "";
+      td.classList.remove("right","wrong","hint","active-word");
+    });
+    clueItems.forEach(function(li){ li.querySelector("button").classList.remove("picked"); });
+    setStatus("Поле очищено. Можно начать заново!");
+  });
+
+  hintBtn.addEventListener("click", function(){
+    let target = null;
+    for(let i=0;i<WORDS.length;i++){
+      const w = WORDS[i];
+      if(wordIsSolved(w)) continue;
+      for(let j=0;j<w.cells.length;j++){
+        const pos = w.cells[j];
+        const e = entry(pos[0],pos[1]);
+        if(norm(e.input.value) !== w.answer[j]){ target = {w:w, e:e, letter:w.answer[j]}; break; }
+      }
+      if(target) break;
+    }
+    if(!target){ setStatus("Подсказок не нужно — всё уже верно!"); return; }
+    target.e.input.value = target.letter;
+    target.e.td.classList.remove("wrong");
+    target.e.td.classList.add("hint");
+    setStatus("Подсказка: слово «" + target.w.n + "», буква «" + target.letter + "».");
+  });
+
+  clueItems.forEach(function(li){
+    li.querySelector("button").addEventListener("click", function(){
+      const w = byNum[li.dataset.n];
+      clearMarks();
+      clueItems.forEach(function(x){ x.querySelector("button").classList.remove("picked"); });
+      li.querySelector("button").classList.add("picked");
+      w.cells.forEach(function(pos){ entry(pos[0],pos[1]).td.classList.add("active-word"); });
+      const firstEmpty = w.cells.find(function(pos){ return !norm(entry(pos[0],pos[1]).input.value); }) || w.cells[0];
+      entry(firstEmpty[0],firstEmpty[1]).input.focus();
+      setStatus("Слово " + w.n + " — " + w.answer.length + " букв.");
+    });
+  });
+
+  document.querySelectorAll(".clue-tabs button").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      document.querySelectorAll(".clue-tabs button").forEach(function(b){
+        b.classList.toggle("active", b === btn);
+        b.setAttribute("aria-selected", b === btn ? "true" : "false");
+      });
+      clueItems.forEach(function(li){ li.classList.toggle("show", li.dataset.dir === btn.dataset.tab); });
+    });
+  });
+
+  cellEls.forEach(function(td){
+    const input = td.querySelector(".cell");
+    input.addEventListener("input", function(){
+      input.value = norm(input.value).slice(0,1);
+      td.classList.remove("right","wrong","hint");
+      if(input.value){
+        const dir = currentDirection(input);
+        const next = neighbor(input, dir);
+        if(next) next.focus();
+      }
+    });
+    input.addEventListener("keydown", function(ev){
+      const dir = ev.key === "ArrowRight" ? "right" :
+                  ev.key === "ArrowLeft" ? "left" :
+                  ev.key === "ArrowDown" ? "down" :
+                  ev.key === "ArrowUp" ? "up" : null;
+      if(dir){ ev.preventDefault(); const next = neighbor(input, dir); if(next) next.focus(); }
+      if(ev.key === "Backspace" && !input.value){
+        const prev = neighbor(input, "left") || neighbor(input, "up");
+        if(prev){ ev.preventDefault(); prev.focus(); prev.value = ""; }
+      }
+    });
+  });
+
+  function currentDirection(input){
+    const r = +input.dataset.r, c = +input.dataset.c;
+    for(let i=0;i<WORDS.length;i++){
+      const w = WORDS[i];
+      for(let j=0;j<w.cells.length;j++){
+        if(w.cells[j][0] === r && w.cells[j][1] === c){
+          if(j < w.answer.length-1 && w.cells[j+1][0] === r && w.cells[j+1][1] === c+1) return "right";
+          if(j < w.answer.length-1 && w.cells[j+1][0] === r+1 && w.cells[j+1][1] === c) return "down";
+        }
+      }
+    }
+    return "right";
+  }
+  function neighbor(input, dir){
+    const r = +input.dataset.r, c = +input.dataset.c;
+    const dr = dir === "down" ? 1 : dir === "up" ? -1 : 0;
+    const dc = dir === "right" ? 1 : dir === "left" ? -1 : 0;
+    let nr = r + dr, nc = c + dc;
+    while(cellMap[nr + ":" + nc]){
+      const e = cellMap[nr + ":" + nc];
+      if(e.input){ return e.input; }
+      nr += dr; nc += dc;
+    }
+    return null;
+  }
+})();
+</script>
+</body>
+</html>
